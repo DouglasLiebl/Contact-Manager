@@ -1,5 +1,5 @@
-<%- include("includes/head"); %>
-
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
 <div class="container">
     <div class="row">
       <div class="col-lg-2"></div>
@@ -8,8 +8,8 @@
         <h1 class="text-center">Criar conta ou Entrar</h1>
         <p class="text-center lead">Faça login ou crie sua conta.</p>
   
+        <%- include('includes/messages'); %>
         <div class="row">
-
             <div class="col-lg">
                 <h4>Faça seu cadastro</h4>
                 <p>Se você ainda não possui uma conta, preencha o formulário abaixo:</p>
@@ -23,7 +23,7 @@
                       <label>Sua Senha</label>
                       <input type="password" class="form-control" name="password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Cria minha conta</button>
+                    <button type="submit" class="btn btn-primary">Criar minha conta</button>
                 </form>
             </div>
 
@@ -50,4 +50,4 @@
     </div>
   </div>
 
-<%- include("includes/footer"); %>
+<%- include('includes/footer'); %>
