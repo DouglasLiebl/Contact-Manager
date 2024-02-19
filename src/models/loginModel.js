@@ -16,6 +16,23 @@ class Login {
         this.user = null;
     }
 
+    async login() {
+        this.validate();
+        if(this.errors.length > 0) return;
+        this.user = await LoginModel.findOne({email: this.body.email});
+
+        if(!this.user) {
+            this.errors.push("Usuário ou senha inválidos.");
+            return;
+        };
+
+        if (!bcrypt.compareSync(this.body.password, this.user.password)) {
+            this.errors.push("Senha inválida.");
+            this.user = null;
+            return;
+        };
+    }
+
     async register() {
         this.validate();
         if (this.errors.length > 0) return;
@@ -25,11 +42,7 @@ class Login {
 
         this.encode_password();
 
-        try {
-            this.user = await LoginModel.create(this.body);
-        } catch (error) {
-            console.error(error);
-        }
+        this.user = await LoginModel.create(this.body);
     }
 
     encode_password() {
