@@ -55,6 +55,23 @@ class Contact {
 
         return await ContactModel.findById(id);
     };
+
+    async edit(id) {
+        if (typeof id !== 'string') return;
+        this.validate();
+        if (this.errors.length > 0) return;
+
+        this.contact = await ContactModel.findByIdAndUpdate(id, this.body, {new: true});
+    }
+
+    static async findAll() {
+        return await ContactModel.find().sort({createdAt: -1});
+    }
+
+    static async delete(id) {
+        if (typeof id !== 'string') return;
+        return await ContactModel.findByIdAndDelete({_id: id});
+    }
 }
 
 module.exports = Contact;
